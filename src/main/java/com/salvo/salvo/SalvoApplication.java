@@ -6,11 +6,13 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.authentication.configurers.GlobalAuthenticationConfigurerAdapter;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -44,7 +46,6 @@ public class SalvoApplication {
 
 /*
 Permite obtener los datos de los usuarios y sus permisos
-
  */
 @Configuration
 class WebSecurityConfiguration extends GlobalAuthenticationConfigurerAdapter {
@@ -93,12 +94,13 @@ class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     http.authorizeRequests()
             .antMatchers("/web/games.html").permitAll()
-            .antMatchers("/web/404.html").permitAll()
+            .antMatchers("/web/404.html","/web/401.html").permitAll()
             .antMatchers("/web/scripts/**").permitAll()
             .antMatchers("/web/styles/**").permitAll()
             .antMatchers("/web/img/**").permitAll()
             .antMatchers("/api/games").permitAll()
             .antMatchers("/api/players").permitAll()
+            .antMatchers("/favicon.ico").permitAll()
             .antMatchers("/rest/*").denyAll()
             .anyRequest().authenticated()
             .and().csrf().disable().formLogin()
