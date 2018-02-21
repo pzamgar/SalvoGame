@@ -84,7 +84,7 @@ public class SalvoController {
     Map<String, Object> dto = new LinkedHashMap<>();
 
     // Estadisticas Jugador/Games
-    dto.put("mail", player.getUserName());
+    dto.put("name", player.getName());
     dto.put("total", totalScoreGamesPlayer(player));
     dto.put("win", winGamesPlayer(player));
     dto.put("lose", loseGamesPlayer(player));
@@ -212,6 +212,7 @@ public class SalvoController {
     Map<String, Object> dto = new LinkedHashMap<>();
     dto.put("gpid", gpid);
     dto.put("id", player.getId());
+    dto.put("name", player.getName());
     dto.put("email", player.getUserName());
     return dto;
   }
@@ -426,7 +427,9 @@ public class SalvoController {
   }
 
   @RequestMapping(path = "/players", method = RequestMethod.POST)
-  public ResponseEntity<Map<String, Object>> createUserPlayer(@RequestParam("username") String usr, @RequestParam("password") String pwd) {
+  public ResponseEntity<Map<String, Object>> createUserPlayer(@RequestParam("name") String name,
+                                                              @RequestParam("username") String usr,
+                                                              @RequestParam("password") String pwd) {
 
     System.out.println("createUserPlayer: " + usr);
 
@@ -437,7 +440,7 @@ public class SalvoController {
     }
 
     // 2.- Creamos el usuario + insertar Repository
-    Player player = new Player(usr, pwd);
+    Player player = new Player(name, usr, pwd);
     repoPlayer.save(player);
     return new ResponseEntity<>(makeMapCUP("userName", usr), HttpStatus.CREATED);
 
@@ -649,6 +652,7 @@ public class SalvoController {
               .stream()
               .filter(player -> player.getUserName().equals(authentication.getName()))
               .collect(toList());
+
     }
 
     // Get player authentication
