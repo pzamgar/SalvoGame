@@ -93,7 +93,10 @@ class WebSecurityConfig extends WebSecurityConfigurerAdapter {
   protected void configure(HttpSecurity http) throws Exception {
 
     http.authorizeRequests()
-            .antMatchers("/web/games.html").permitAll()
+            .antMatchers("/").permitAll()
+            .antMatchers("/web/index.html").permitAll()
+            .antMatchers("/web/credits.html").permitAll()
+            .antMatchers("/web/rules.html").permitAll()
             .antMatchers("/web/404.html","/web/401.html").permitAll()
             .antMatchers("/web/scripts/**").permitAll()
             .antMatchers("/web/styles/**").permitAll()
