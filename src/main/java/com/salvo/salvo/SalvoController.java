@@ -62,12 +62,10 @@ public class SalvoController {
     dto.put("listaGames", repoGame.findAll().stream().
             map(game -> GameDTO(game)).
             collect(Collectors.toList()));
-    dto.put("tableStat", repoGame.findAll().stream().
-            map(game -> game.getPlayers()).
-            flatMap(players -> players.stream()).
-            map(player -> calcularStaticsGames(player)).
-            distinct().
-            collect(toList()));
+    dto.put("tableStat", repoPlayer.findAll()
+            .stream()
+            .map(player -> calcularStaticsGames(player))
+            .collect(toSet()));
     lg.add(dto);
 
     return lg;
@@ -99,14 +97,9 @@ public class SalvoController {
    * @return Double, total la suma de las puntuaciones
    */
   private Double totalScoreGamesPlayer(Player player) {
-    return repoGame.findAll().stream().map(game -> {
-
-      if (player.getScore(game) != null) {
-        return player.getScore(game).getScore();
-      } else {
-        return 0.0;
-      }
-    }).reduce(0.00, (a, b) -> a + b);
+    return player.getScores().stream()
+            .map(score -> score != null ? score.getScore() : 0.0)
+            .reduce(0.00, (a, b) -> a + b);
   }
 
   /**
@@ -116,16 +109,9 @@ public class SalvoController {
    * @return Long
    */
   private Long winGamesPlayer(Player player) {
-
-    return repoGame.findAll().stream().filter(game -> {
-
-      if (player.getScore(game) != null) {
-        return player.getScore(game).getScore() == 1;
-      } else {
-        return false;
-      }
-
-    }).count();
+    return player.getScores().stream()
+            .filter(score -> score != null ? score.getScore() == 1 : false)
+            .count();
   }
 
   /**
@@ -135,16 +121,9 @@ public class SalvoController {
    * @return Long
    */
   private Long loseGamesPlayer(Player player) {
-
-    return repoGame.findAll().stream().filter(game -> {
-
-      if (player.getScore(game) != null) {
-        return player.getScore(game).getScore() == 0;
-      } else {
-        return false;
-      }
-
-    }).count();
+    return player.getScores().stream()
+            .filter(score -> score != null ? score.getScore() == 0 : false)
+            .count();
   }
 
   /**
@@ -154,16 +133,9 @@ public class SalvoController {
    * @return
    */
   private Long tieGamesPlayer(Player player) {
-
-    return repoGame.findAll().stream().filter(game -> {
-
-      if (player.getScore(game) != null) {
-        return player.getScore(game).getScore() == 0.5;
-      } else {
-        return false;
-      }
-
-    }).count();
+    return player.getScores().stream()
+            .filter(score -> score != null ? score.getScore() == 0.5 : false)
+            .count();
   }
 
   /**
@@ -431,17 +403,17 @@ public class SalvoController {
                                                               @RequestParam("username") String usr,
                                                               @RequestParam("password") String pwd) {
 
-    System.out.println("createUserPlayer: " + usr);
+    System.out.println("createUserPlayer: " + usr + "," + name);
 
     // 1.- Validar si el Player ya existe en Repository
-    List<Player> players = repoPlayer.findByUserName(usr);
-    if (!players.isEmpty()) {
+    Player player = repoPlayer.findByUserName(usr);
+    if (player != null) {
       return new ResponseEntity<>(makeMapCUP("error", "Name in use"), HttpStatus.FORBIDDEN);
     }
 
     // 2.- Creamos el usuario + insertar Repository
-    Player player = new Player(name, usr, pwd);
-    repoPlayer.save(player);
+    Player player_new = new Player(name, usr, pwd);
+    repoPlayer.save(player_new);
     return new ResponseEntity<>(makeMapCUP("userName", usr), HttpStatus.CREATED);
 
   }
@@ -469,7 +441,7 @@ public class SalvoController {
       GamePlayer gamePlayer = new GamePlayer(getPlayerLogin(authentication), game);
       repoGamePlayer.save(gamePlayer);
 
-      // Cramos respuesta Entity
+      // Creamos respuesta Entity
       dto.put("gamePlayerId", gamePlayer.getId());
       return new ResponseEntity<>(makeMapCUP("createGame", dto), HttpStatus.ACCEPTED);
     }
@@ -526,7 +498,7 @@ public class SalvoController {
   @RequestMapping(path = "/games/players/{gamePlayerId}/ships", method = RequestMethod.POST)
   public ResponseEntity<Map<String, Object>> addShips(@PathVariable Long gamePlayerId, @RequestBody List<Ship> lship, Authentication authentication) {
 
-    System.out.println(" (xx) addShips --> ");
+    System.out.println(" (xx) addShips --> " + lship);
 
     // 1.- Obtenemos el id del usuario de sesion LOGIN
     Long idAut = (getPlayerLogin(authentication) == null ? 0 : getPlayerLogin(authentication).getId());
@@ -557,18 +529,24 @@ public class SalvoController {
           return new ResponseEntity<>(makeMapCUP("error", "user already has ships placed"), HttpStatus.FORBIDDEN);
         } else {
 
-          // a.- Recorremos la lista de ships + locations
-          for (Ship ship : lship) {
-            System.out.println(ship);
-            Ship sh = new Ship();
-            sh.setShipType(ship.getShipType());
-            sh.setLocations(ship.getLocations());
-            gamePlayer.addShip(sh);
-            repoShip.save(sh);
-          }
+          // a.- Validar la lista que nos envian de SHIPS
+          if (validarListaShips(lship) == -1) {
+            return new ResponseEntity<>(makeMapCUP("error", "list ship is incorrect"), HttpStatus.FORBIDDEN);
+          } else {
 
-          // 5.- Tratamiento vincular SHIPS to PLAYER
-          return new ResponseEntity<>(makeMapCUP("addShips", "Ships cheated"), HttpStatus.CREATED);
+            // b.- Recorremos la lista de ships + locations
+            for (Ship ship : lship) {
+              System.out.println(ship);
+              Ship sh = new Ship();
+              sh.setShipType(ship.getShipType());
+              sh.setLocations(ship.getLocations());
+              gamePlayer.addShip(sh);
+              repoShip.save(sh);
+            }
+
+            // 5.- Tratamiento vincular SHIPS to PLAYER
+            return new ResponseEntity<>(makeMapCUP("addShips", "Ships cheated"), HttpStatus.CREATED);
+          }
         }
       }
     }
@@ -579,11 +557,6 @@ public class SalvoController {
           salvo, Authentication authentication) {
 
     System.out.println(" (zz) addSalvos --> ");
-    //********************************************************************************
-    //**** ojo falta controlar la raja SHOTS cuando el estado finalizar juego!!!!!!!
-    //**** ojo falta controlar la raja SHOTS cuando el estado finalizar juego!!!!!!!
-    //**** ojo falta controlar la raja SHOTS cuando el estado finalizar juego!!!!!!!
-    //********************************************************************************
 
     // 1.- Obtenemos el id del usuario de sesion LOGIN
     Long idAut = (getPlayerLogin(authentication) == null ? 0 : getPlayerLogin(authentication).getId());
@@ -946,6 +919,54 @@ public class SalvoController {
 
     return litWin;
 
+  }
+
+  /**
+   * Validamos la lista ships enviada
+   *
+   * @param listShip
+   * @return
+   */
+  private Integer validarListaShips(List<Ship> listShip) {
+
+    Integer result = 0;
+    // 1.- Validar numero de barcos enviados segun modalidad Juego
+    if (listShip.size() < 6) {
+      return -1;
+    }
+
+    // 2.- Validar que las posiciones de los ships sean correctas sobre el grid
+    //     la cantidad de posiciones se corresponda a la del tipo de barco
+    String row = "";
+    String col = "";
+
+    for (Ship ship : listShip) {
+
+      if (ship.getLocations().size() != ship.getLongTypeShip()) {
+        return -1;
+      }
+
+      // Validar si la celda esta en el limite
+      for (String celda : ship.getLocations()) {
+        row = celda.substring(0, 1);
+        col = celda.substring(1, celda.length());
+
+        // La Columna entre 1 y 10
+        if (Integer.parseInt(col) < 1 || Integer.parseInt(col) > 10) {
+          return -1;
+        }
+
+        // La fila entre A y J
+        if (row.compareTo("A") < 0 || row.compareTo("J") > 0) {
+          return -1;
+        }
+      }
+    }
+
+    // 3.- Validar que las posiciones sean correlativas Horizontal o Vertical
+    // segun el primer valor de la celda localizaciones
+
+    return 0;
   }
 
 }

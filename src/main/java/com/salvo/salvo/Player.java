@@ -95,6 +95,10 @@ public class Player {
     return scores.stream().filter(p -> p.getGame().getId() == game.getId()).findFirst().orElse(null);
   }
 
+  public Set<Score> getScores() {
+    return scores;
+  }
+
   @Override
   public String toString() {
     return "Player{" +

@@ -66,10 +66,9 @@ class WebSecurityConfiguration extends GlobalAuthenticationConfigurerAdapter {
       public UserDetails loadUserByUsername(String name) throws UsernameNotFoundException {
 
         //Busqueda del nombre en el repositorio
-        List<Player> players = playerRepository.findByUserName(name);
+        Player player = playerRepository.findByUserName(name);
 
-        if (!players.isEmpty()) {
-          Player player = players.get(0);
+        if (player != null) {
           System.out.println("Player login: " + player);
           return new User(player.getUserName(), player.getPassword(), AuthorityUtils.createAuthorityList("USER"));
         } else {
@@ -95,9 +94,9 @@ class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     http.authorizeRequests()
             .antMatchers("/").permitAll()
             .antMatchers("/web/index.html").permitAll()
+            .antMatchers("/web/index1.html").permitAll()
             .antMatchers("/web/credits.html").permitAll()
             .antMatchers("/web/rules.html").permitAll()
-            .antMatchers("/web/404.html","/web/401.html").permitAll()
             .antMatchers("/web/scripts/**").permitAll()
             .antMatchers("/web/styles/**").permitAll()
             .antMatchers("/web/img/**").permitAll()
@@ -114,7 +113,7 @@ class WebSecurityConfig extends WebSecurityConfigurerAdapter {
             .logout().logoutUrl("/api/logout");
 
     // turn off checking for CSRF tokens
-    http.csrf().disable();
+    //http.csrf().disable();
 
     // if user is not authenticated, just send an authentication failure response
     http.exceptionHandling().authenticationEntryPoint((req, res, exc) -> res.sendError(HttpServletResponse.SC_UNAUTHORIZED));
