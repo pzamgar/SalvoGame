@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Ship Locations</title>
+
+  <!-- Bootstrap 3 & Jquery -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+  <!-- Font awsome icon -->
+  <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
+
+  <link href="https://fonts.googleapis.com/css?family=Lato:100,300,400,700,900" rel="stylesheet">
+
+  <!-- Estilos usuario -->
+  <link rel="stylesheet" href="styles/styles.css">
+
+  <script src="scripts/game.js"></script>
+</head>
+<body>
+
+<div class="container-fluid">
+
+  <!-- Modal Info http respuesta -->
+  <div class="modal fade" id="modalInfo">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-body httpError"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Navbar Login/SignUp/Logout -->
+  <nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+      <ul class="nav navbar-nav logoutGames navbar-right">
+        <li><span class="iconUserLogin "><i class="fas fa-user"></i><span class="txtUserLogin"></span></span></li>
+      </ul>
+      <ul class="nav navbar-nav logoutGames">
+        <li>
+          <a href="#" onClick="history.go(-1)" class="back_page"><< Back</a>
+        </li>
+        <li>
+          <form action="">
+            <button type="button" id="logout_player" class="btn btn-danger navbar-btn">Logout</button>
+          </form>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="row">
+    <h1></h1>
+    <div class="col-md-12 boxState">
+      <div class="boxStateGame"></div>
+    </div>
+    <div class="col-md-4 marginBottom-sm">
+      <h3 class="heading__3 local"></h3>
+      <table class="tableLocal">
+        <thead id="table-headers-l">
+        </thead>
+        <tbody id="table-rows-l" data-box="grid">
+        </tbody>
+      </table>
+    </div>
+    <div class="col-md-4 listaShips marginBottom-sm">
+      <div class="boxLista">
+        <button id="save_Ships" class="btn btn-success">Save</button>
+        <div id="listShips" data-box="origen">
+          <div class="spCarrier itemShip" data-pos="hor" draggable="true" id="drag1"></div>
+          <div class="spBattleship itemShip" data-pos="hor" draggable="true" id="drag2"></div>
+          <div class="spSubmarine itemShip" data-pos="hor" draggable="true" id="drag3"></div>
+          <div class="spDestroyer itemShip" data-pos="hor" draggable="true" id="drag4"></div>
+          <div class="spPatrolBoat itemShip" data-pos="hor" draggable="true" id="drag5"></div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4 boxEnemy marginBottom-sm">
+      <h3 class="heading__3 oponent"></h3>
+      <p class="fail"></p>
+      <table class="tableOponent">
+        <thead id="table-headers-v">
+        </thead>
+        <tbody id="table-rows-v">
+        </tbody>
+      </table>
+      <button id="save_Salvos" class="btn btn-succes">Salvos</button>
+    </div>
+    <div class="col-md-4 boxHistory marginBottom-sm">
+      <div class="boxTableHistory">
+        <h3 class="heading__3"><span id="gamePlay"> - History Hits/Skin </span></h3>
+        <table class="table tableHits">
+          <thead id="theadHits"></thead>
+          <tbody id="tbodyHits"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <div class="row marginTop-gm">
+    <div class="container-fluid">
+      <div class="footer">
+        <div class="footer__box">
+          <span class="footer__box--copy">&copy; 2018 Educational Battleship Game</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

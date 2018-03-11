@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Salvo - Rules</title>
+
+  <!-- Bootstrap 3 & Jquery -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+  <link href="https://fonts.googleapis.com/css?family=Lato:100,300,400,700,900" rel="stylesheet">
+
+  <!-- Estilos usuario -->
+  <link rel="stylesheet" href="styles/styles.css">
+</head>
+<body>
+
+<div class="container-fluid">
+  <!-- Navbar Login/SignUp/Logout -->
+  <nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <a class="navbar-brand" href="#">BATTLESHIP</a>
+        <ul class="nav navbar-nav">
+          <li>
+            <a href="#" onClick="history.go(-1)" class="back_page"><< Back</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Cuerpo de las rules -->
+  <div class="row">
+    <div class="col-md-offset-1 col-md-10 col-sm-12">
+      <h1>Reglas BattleShip</h1>
+      <ol>
+        <h2>Objetivo del Juego</h2>
+        <p>Hundir los 5 barcos de tu oponente antes que él acabe con los tuyos.</p>
+        <p>Cada jugador tiene 2 tableros compuesto por 10 filas y 10 columnas.
+          <ul>
+            <li>
+              <span>Tablero posicion barcos:</span>
+        <p></p>
+        </li>
+        <li>
+          <span>Tablero principal de disparos:</span>
+          <p></p>
+        </li>
+        </ul>
+        <p>
+          Cada jugador tiene una flota de 5 barcos de diferentes tamaños que ocupan en el tablero.
+          La lista de barcos que conforman el juego son:
+        <table>
+          <thead>
+          <tr>
+            <th>Nombre barco</th>
+            <th>Posicion ocupa GRID</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr>
+            <td>Carrier</td>
+            <td>5 posiciones</td>
+          </tr>
+          <tr>
+            <td>Battleship</td>
+            <td>4 posiciones</td>
+          </tr>
+          <tr>
+            <td>Submarine </td>
+            <td>3 posiciones</td>
+          </tr>
+          <tr>
+            <td>Destroyer </td>
+            <td>3 posiciones</td>
+          </tr>
+          <tr>
+            <td>Patrol Boat</td>
+            <td>2 posiciones</td>
+          </tr>
+          </tbody>
+        </table>
+
+        </p>
+      </ol>
+      <ol>
+        <h2>Manejo control Juego</h2>
+        <p>
+          Se utiliza el raton para colocar los barcos dentro del tablero posicion. Se arrastran los barcos hacia el
+          tablero. Par mover la posicion del barco
+          en horizontal vertical se pulsa dos veces encima del barco y automaticamente realizara un cambio de posicion
+          de 90º de horizaontal a vertical y viceversa.
+          Para realizar los disparos utiliza el raton para seleccionar el disparo en el tablero principal, para
+          rectificar y cambiar el disparo, pulsar sobre el disparo.
+        </p>
+      </ol>
+      <ol>
+        <h2>Terminologia y movimientos</h2>
+        <p></p>
+      </ol>
+      <ol>
+        <h2>Reglas generales</h2>
+        <p></p>
+      </ol>
+      <ol>
+        <h2>Comienza la partida</h2>
+        <p></p>
+      </ol>
+      <ol>
+        <h2>Durante la partida</h2>
+        <p></p>
+      </ol>
+      <ol>
+        <h2>Final de partida</h2>
+        <p>Gana el jugador que antes hunda la flota de su enemigo.</p>
+      </ol>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Rules -->
+  <div class="row">
+    <div class="container-fluid">
+      <div class="footer marginTop-lm">
+        <div class="footer__box">
+          <span class="footer__box--copy">&copy; 2018 Educational Battleship Game</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

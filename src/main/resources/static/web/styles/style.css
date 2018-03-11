@@ -1,0 +1,505 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: inherit;
+    list-style: none;
+}
+
+*:focus {
+    outline: none;
+}
+
+html {
+    font-size: 62.5%;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Lato", sans-serif;
+    font-weight: 400;
+    font-size: 1.6rem;
+    background-color: white;
+    height: 100%;
+    width: 100%;
+}
+
+/****************************************************
+/* Estilos heading
+ */
+.heading__1 {
+    margin: 0;
+    text-transform: uppercase;
+    text-align: center;
+    border-bottom: 2px solid #C0C0C0;
+    background-color: #EEE8AA;
+    color: #708090;
+}
+
+.heading__2 {
+    text-align: center;
+    border-bottom: 1px solid #C0C0C0;
+    background-color: #EEE8AA;
+    color: #708090;
+}
+
+.heading__3 {
+    text-align: center;
+    color: #D3D3D3;
+}
+
+/****************************************************
+/* Estilos grid salvos
+ */
+
+/****************************************************
+/* Estilos table scores / hits
+ */
+thead td,
+tbody td {
+    text-align: center;
+}
+
+thead td:first-child,
+tbody td:first-child {
+    text-align: left;
+}
+
+tableHits th {
+
+    text-align: center;
+}
+
+/****************************************************
+/* Estilos Lista Games
+ */
+.list__games {
+    padding: 2rem 1rem;
+}
+
+.list__games li {
+    padding: 1rem 0;
+    border-bottom: 1px solid #D3D3D3;
+}
+
+.listFechaGame {
+    font-weight: 700;
+    color: orangered;
+    font-size: 1.2rem;
+}
+
+.listIdGame {
+    font-weight: 700;
+}
+
+.listUsersGame {
+    padding: 0 2rem;
+    font-size: 1.4rem;
+}
+
+.itemPlayerUser {
+    border-bottom: 1px solid cornflowerblue;
+    color: cornflowerblue;
+}
+
+#create_game {
+    font-size: 1.4rem;
+    color: white;
+    background-color: #9B6F9B;
+    border: 1px solid #C0C0C0;
+    width: 12rem;
+    height: 4rem;
+    margin-right: 1rem;
+    -webkit-transition: all 0.5s;
+    -moz-transition: all 0.5s;
+    -ms-transition: all 0.5s;
+    -o-transition: all 0.5s;
+    transition: all 0.5s;
+}
+
+#create_game {
+    display: none;
+}
+
+.join_game,
+.view_game {
+    font-size: 1.4rem;
+    color: white;
+    padding: 1.5rem 1.5rem;
+    display: inline-block;
+    cursor: pointer;
+    text-align: center;
+    vertical-align: middle;
+    line-height: 1rem;
+    border-radius: 2px;
+    -webkit-transition: all 0.5s;
+    -moz-transition: all 0.5s;
+    -ms-transition: all 0.5s;
+    -o-transition: all 0.5s;
+    transition: all 0.5s;
+}
+
+.view_game {
+    background-color: #708090;
+    border: 1px solid #EEE8AA;
+}
+
+.join_game {
+    display: none;
+    background-color: orange;
+    border: 1px solid #EEE8AA;
+}
+
+#create_game:hover {
+    border: 1px solid #9B6F9B;
+    color: #C0C0C0;
+    background-color: white;
+    font-weight: 700;
+}
+
+.join_game:hover,
+.view_game:hover {
+    border: 1px solid #9B6F9B;
+    color: #C0C0C0;
+    background-color: white;
+    font-weight: 700;
+}
+
+/****************************************************
+/* Estilos LOGIN/LOGOUT
+ */
+.logoutGames {
+    display: none;
+}
+
+.formError,
+.httpError {
+    color: orangered;
+}
+
+/****************************************************
+/* Estilos Name usr Login
+ */
+
+.boxUserLogin {
+    display: none;
+    position: relative;
+    height: 4rem;
+    text-align: right;
+}
+
+.iconUserLogin {
+    font-size: 2rem;
+    color: #C0C0C0;
+    text-align: right;
+}
+
+.txtUserLogin {
+    font-size: 2rem;
+    font-weight: 500;
+    padding: 0 1rem;
+}
+
+/****************************************************
+/* Estilos Formularios LOGIN/LOGOUT
+ */
+.listFormLogin li {
+    padding: 1rem 0.5rem;
+}
+
+input[type="text"],
+input[type="password"] {
+    height: 4rem;
+    border: 1px solid #C0C0C0;
+    padding: 2px 2px 2px 10px;
+    width: 100%;
+}
+
+#login_player,
+#logout_player,
+#register_player {
+    font-size: 1.8rem;
+    color: white;
+    background-color: #EEE8AA;
+    border: 1px solid #C0C0C0;
+    width: 12rem;
+    height: 4rem;
+    margin-right: 1rem;
+    -webkit-transition: all 0.5s;
+    -moz-transition: all 0.5s;
+    -ms-transition: all 0.5s;
+    -o-transition: all 0.5s;
+    transition: all 0.5s;
+}
+
+#login_player:hover,
+#logout_player:hover,
+#register_player:hover {
+    border: 1px solid #EEE8AA;
+    color: #C0C0C0;
+    background-color: white;
+    font-weight: 700;
+}
+
+/****************************************************
+/* Estilos PAGE GAME.HTML
+ ****************************************************/
+
+/****************************************************
+/* Estilos GRID
+ */
+#table-headers-l th,
+#table-headers-v th {
+    text-align: center;
+    border: none;
+    color: #D3D3D3;
+}
+
+#table-rows-l th,
+#table-rows-v th {
+    text-align: center;
+    color: #D3D3D3;
+    /*
+    background-color: #EEE8AA;*/
+}
+
+.tableLocal th,
+.tableOponent th {
+    width: 4rem;
+    height: 4rem;
+}
+
+.tableLocal td,
+.tableOponent td {
+    width: 4rem;
+    height: 4rem;
+    border: 1px solid #D3D3D3;
+}
+
+.cellSalvo {
+    cursor: pointer;
+}
+
+/****************************************************
+/* Estilos barcos
+ */
+.spCarrier {
+    background-color: pink;
+}
+
+.spBattleship {
+    background-color: brown;
+}
+
+.spSubmarine {
+    background-color: greenyellow;
+}
+
+.spDestroyer {
+    background-color: lightgrey;
+}
+
+.spPatrolBoat {
+    background-color: navajowhite;
+}
+
+.salvoLocal {
+    color: white;
+    background-color: dodgerblue;
+    width: 3rem;
+    height: 3rem;
+    display: block;
+    border-radius: 50%;
+    text-align: center;
+    vertical-align: middle;
+    line-height: 3rem;
+    margin: 0 auto;
+}
+
+.salvoVisit {
+    color: white;
+    background-color: orangered;
+    width: 3rem;
+    height: 3rem;
+    display: block;
+    border-radius: 50%;
+    text-align: center;
+    vertical-align: middle;
+    line-height: 3rem;
+    margin: 0 auto;
+}
+
+/****************************************************
+/* Estilos  LIST SHIPS
+*/
+
+.boxLista {
+    width: 40rem;
+    margin-left: 2rem;
+    display: none;
+}
+
+.boxLista {
+    margin: 2rem 0;
+}
+
+#listShips {
+    padding: 1rem;
+    border: 2px solid lightgreen;
+    border-radius: 2px;
+}
+
+.itemShip {
+    text-align: center;
+    vertical-align: middle;
+    line-height: 4rem;
+    cursor: move;
+    margin: 1rem 0;
+}
+
+.spCarrier {
+    background-color: pink;
+    width: 20rem;
+    height: 4rem;
+}
+
+.spBattleship {
+    background-color: brown;
+    width: 16rem;
+    height: 4rem;
+}
+
+.spSubmarine {
+    background-color: greenyellow;
+    width: 12rem;
+    height: 4rem;
+}
+
+.spDestroyer {
+    background-color: lightgrey;
+    width: 12rem;
+    height: 4rem;
+}
+
+.spPatrolBoat {
+    background-color: navajowhite;
+    width: 8rem;
+    height: 4rem;
+}
+
+.shipCollision {
+    background-color: orangered;
+    box-shadow: -10px -10px 30px 4px rgba(255, 69, 0, 0.3),
+    10px 10px 30px 4px rgba(255, 69, 0, 0.3);
+}
+
+/****************************************************
+/* Estilos GRID SHIPS
+*/
+.shipRel {
+    position: relative;
+}
+
+.shipAbs {
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin: 0;
+}
+
+.rotVer {
+    -webkit-transform: translate(40px) rotateZ(90deg);
+    -moz-transform: translate(40px) rotateZ(90deg);
+    -ms-transform: translate(40px) rotateZ(90deg);
+    -o-transform: translate(40px) rotateZ(90deg);
+    transform: translate(40px) rotateZ(90deg);
+    transform-origin: left top;
+}
+
+.rotHor {
+    -webkit-transform: translate(0) rotateZ(0deg);
+    -moz-transform: translate(0) rotateZ(0deg);
+    -ms-transform: translate(0) rotateZ(0deg);
+    -o-transform: translate(0) rotateZ(0deg);
+    transform: translate(0) rotateZ(0deg);
+    transform-origin: left top;
+}
+
+/****************************************************
+/* Estilos BOTONES SAVE SHIPS/SALVO
+*/
+#save_Ships,
+#save_Salvos {
+    font-size: 1.6rem;
+    color: white;
+    background-color: orangered;
+    border: 1px solid #C0C0C0;
+    width: 6rem;
+    height: 6rem;
+    font-weight: 700;
+    border-radius: 50%;
+    margin-right: 1rem;
+    -webkit-transition: all 0.5s;
+    -moz-transition: all 0.5s;
+    -ms-transition: all 0.5s;
+    -o-transition: all 0.5s;
+    transition: all 0.5s;
+
+    position: absolute;
+    display: none;
+}
+
+#save_Ships:hover,
+#save_Salvos:hover {
+    border: 1px solid #EEE8AA;
+    color: #C0C0C0;
+    background-color: white;
+    font-weight: 700;
+}
+
+/****************************************************
+/* Estilos Mensajes STATE
+ ****************************************************/
+
+.boxState{
+height: 3rem;
+}
+
+.boxStateGame {
+    color: dodgerblue;
+    font-size: 1.4rem;
+    text-align: center;
+}
+
+@-webkit-keyframes pulse {
+    from {
+        opacity: 0.0; /* Nivel de transparencia inicial */
+        font-size: 1.4rem; /* Tamaño inicial de la font en la animación */
+    }
+    to {
+        opacity: 0.8; /* Nivel de Transparencia final */
+        font-size: 2.4rem; /* Tamaño final de la font en la animación */
+    }
+}
+
+.animacionpulse {
+    -webkit-animation-name: pulse; /* El nombre del efecto que estamos agregando */
+    -webkit-animation-duration: 2s; /* Tiempo que durará la animación */
+    -webkit-animation-iteration-count: infinite; /* Las veces que queremos reproducir la animación */
+    -webkit-animation-timing-function: ease-in-out;
+    -webkit-animation-direction: alternate; /* Propiedad utilizada para que el texto regrese al tamaño de origen de manera gradual */
+}
+
+.boxHistory {
+    display: none;
+}
+
+/****************************************************
+/* Estilos generales
+ ****************************************************/
+.marginBottom-sm {
+    margin-bottom: 2rem;
+}
+
+.marginTop-sm {
+    margin-top: 2rem;
+}

@@ -27,5 +27,5 @@ nbdist/
 ############################
 gradle/
 out/
-src/main/resources/
+#src/main/resources/
 src/test/

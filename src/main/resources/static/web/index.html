@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Salvo</title>
+
+  <!-- Bootstrap 3 & Jquery -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+  <!-- Font awsome icon -->
+  <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
+
+  <link href="https://fonts.googleapis.com/css?family=Lato:100,300,400,700,900" rel="stylesheet">
+
+  <!-- Estilos usuario -->
+  <link rel="stylesheet" href="styles/styles.css">
+
+  <script src="scripts/moment-with-locales.js"></script>
+  <script src="scripts/games.js"></script>
+
+</head>
+<body>
+
+<div class="container-fluid">
+
+  <!-- Modal Info http respuesta -->
+  <div class="modal fade" id="modalInfo">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-body httpError"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal Login  -->
+  <div id="loginModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header modalHeader-login">
+          <h3 class="heading__3">Login Players</h3>
+        </div>
+        <div class="modal-body">
+          <form action="" onsubmit="return false;">
+            <ul class="listFormLogin">
+              <li><input id="usrLogin" type="text" size="30" placeholder="User mail"></li>
+              <li><input id="pwdLogin" type="password" size="30" placeholder="User password"></li>
+              <li>
+                <button id="login_player" class="btn btn-success">Login</button>
+              </li>
+            </ul>
+          </form>
+          <div class="formError"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal SignUp  -->
+  <div id="registerModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header modalHeader-signUp">
+          <h3 class="heading__3">Sign UP</h3>
+        </div>
+        <div class="modal-body">
+          <form action="" onsubmit="return false;">
+            <ul class="listFormSignUp">
+              <li><input id="nameSignUp" type="text" size="30" placeholder="User name"></li>
+              <li><input id="usrSignUp" type="text" size="30" placeholder="User mail"></li>
+              <li><input id="pwdSignUp" type="password" size="30" placeholder="User password"></li>
+              <li>
+                <button id="register_player" class="btn btn-info">Register</button>
+              </li>
+            </ul>
+          </form>
+          <div class="formError"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Navbar Login/SignUp/Logout -->
+  <nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <a class="navbar-brand" href="#">BATTLESHIP</a>
+      </div>
+      <ul class="nav navbar-nav">
+        <li><a href="/web/rules.html">Rules Game</a></li>
+        <li><a href="/web/credits.html">Credits</a></li>
+      </ul>
+      <ul class="nav navbar-nav loginGames navbar-right">
+        <li><a href="#" data-toggle="modal" data-target="#loginModal">Login</a></li>
+        <li><a href="#" data-toggle="modal" data-target="#registerModal">Sign Up</a></li>
+        <li><span class="iconUserLogin logoutGames navbar-brand"><i class="fas fa-user"></i><span
+            class="txtUserLogin"></span></span>
+        </li>
+      </ul>
+      <ul class="nav navbar-nav logoutGames navbar-right">
+        <li><span class="iconUserLogin "><i class="fas fa-user"></i><span class="txtUserLogin"></span></span></li>
+      </ul>
+      <ul class="nav navbar-nav logoutGames">
+        <li>
+          <form action="">
+            <button type="button" id="logout_player" class="btn btn-danger navbar-btn">Logout</button>
+          </form>
+        </li>
+        <li>
+          <button id="create_game" class="btn btn-success navbar-btn">Create GAME</button>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="row principal">
+    <div class="col-md-offset-1 col-md-4 col-sm-12">
+      <div class="panel-group">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h2 class="panel-title">
+              <a data-toggle="collapse" href="#collapseOne">Score Players</a>
+            </h2>
+          </div>
+          <div id="collapseOne" class="panel-collapse collapse in">
+            <div class="panel-body">
+              <table class="table table-striped">
+                <thead id="table-headers">
+                </thead>
+                <tbody id="table-rows">
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6 col-sm-12">
+      <div class="panel-group">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h2 class="panel-title">
+              <a data-toggle="collapse" href="#collapseTwo">List Games</a>
+            </h2>
+          </div>
+          <div id="collapseTwo" class="panel-collapse collapse in">
+            <div class="panel-body">
+              <ul id="listGames" class="list-group list__games "></ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="container-fluid">
+      <div class="footer marginTop-lm">
+        <div class="footer__box">
+          <span class="footer__box--copy">&copy; 2018 Educational Battleship Game</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>
